@@ -39,7 +39,7 @@ def listen(client, addr):
                     #print(message)
                     user.send(message)
                 except Exception as e:
-                    print("error in send")
+                    print(f"Error: {e}")
                     break
 
         if sss1 == 'exit':

@@ -4,8 +4,6 @@ import multiprocessing
 import time
 import sys
 
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect((socket.gethostname(), 6666))
 
 
 class ThreadWithReturnValue(Thread):
@@ -85,6 +83,8 @@ def main(client):
         client.send(res.encode('utf-8'))
 
 if __name__ == '__main__':
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client.connect((socket.gethostname(), 6666))
     main(client)
 
 
