@@ -3,20 +3,34 @@ import base64
 import pyautogui
 from threading import Thread
 
-def lissen_me(client, fport):
-    x = 0; y = 0
+# sending coords
+#def lissen_me(client, fport):
+#    x = 0; y = 0
+#
+#
+#    while True:
+#        #message = input()
+#        #port = int(input('type port for sending: '))
+#        x1, y1 = pyautogui.position()
+#        if not (x1 == x or y1 == y):
+#            x = x1 ; y = y1
+#            message = str.format('X: {0}, Y: {1}', x1, y1)
+#            message = message.encode('utf-8')
+#            #message = base64.b64encode(message)
+#            #addr = (socket.gethostname(), fport)
+#            addr = ('192.168.143.78', fport)
+#            client.sendto(message, addr)
 
+def lissen_me(client, fport):
     while True:
         #message = input()
         #port = int(input('type port for sending: '))
-        x1, y1 = pyautogui.position()
-        if not (x1 == x or y1 == y):
-            x = x1 ; y = y1
-            message = str.format('X: {0}, Y: {1}', x1, y1)
-            message = message.encode('utf-8')
-            #message = base64.b64encode(message)
-            addr = (socket.gethostname(), fport)
-            client.sendto(message, addr)
+        message = input('>>')
+        message = message.encode('utf-8')
+        #message = base64.b64encode(message)
+        #addr = (socket.gethostname(), fport)
+        addr = ('192.168.143.78', fport)
+        client.sendto(message, addr)
 
 def lissen_server(client):
     while True:
@@ -33,8 +47,11 @@ def main():
     #fport = int(input('Type the port for your freind: '))
     yport = 9999
     fport = 8888
+    host = '192.168.143.184'
 
-    client.bind((socket.gethostname(), yport))
+    #client.bind((socket.gethostname(), yport))
+    addr = (host, yport)
+    client.bind(addr)
 
     thr1 = Thread(target=lissen_me, args=(client, fport), daemon=True)
     thr2 = Thread(target=lissen_server, args=(client, ), daemon=True)
